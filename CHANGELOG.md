@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.1.0
+
+- Add support for `.bitbucket` parent directories
+- Exports custom `ReadOnlyDict` type
+
 ## v2.0.2
 
 - Fix: import style used for `true-case-path` broke when using Node's esm mode directly
