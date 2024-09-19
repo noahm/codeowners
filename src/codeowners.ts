@@ -12,7 +12,7 @@ function ownerMatcher(pathString: string) {
   return matcher.ignores.bind(matcher);
 }
 
-const PARENT_FOLDERS = [".github", ".gitlab", "docs"];
+const PARENT_FOLDERS = [".bitbucket", ".github", ".gitlab", "docs"];
 const CODEOWNERS = "CODEOWNERS";
 
 interface OwnerEntry {
@@ -21,7 +21,7 @@ interface OwnerEntry {
   match(pathname: string): boolean;
 }
 
-interface ReadOnlyDict<T> {
+export interface ReadOnlyDict<T> {
   readonly [key: string]: T | undefined;
 }
 
