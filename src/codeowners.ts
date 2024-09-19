@@ -21,7 +21,7 @@ interface OwnerEntry {
   match(pathname: string): boolean;
 }
 
-interface ReadOnlyDict<T> {
+export interface ReadOnlyDict<T> {
   readonly [key: string]: T | undefined;
 }
 
