@@ -26,3 +26,21 @@ jobs:
       
       - name: Are the types wrong?
         run: bun attw
+  node:
+    name: Node version checks
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [20, 22, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - name: Install Dependencies
+        run: bun install
+      - name: Build (tsup)
+        run: bun run build
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Node.js sanity test
+        run: node test/codeowners.node-test.js
