@@ -1,10 +1,10 @@
-name: Status Checks
+name: Checks
 on:
   push:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: All status checks
+    name: Bun checks
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
@@ -27,7 +27,7 @@ jobs:
       - name: Are the types wrong?
         run: bun attw
   node:
-    name: Node version checks
+    name: Node.js
     runs-on: ubuntu-latest
     strategy:
       matrix:
