@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.1.1
+
+- Fix: build with `esModuleInterop` to better support `true-case-path` imports in more scenarios
+
 ## v2.1.0
 
 - Add support for `.bitbucket` parent directories
