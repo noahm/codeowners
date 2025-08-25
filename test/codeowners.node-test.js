@@ -1,7 +1,7 @@
 // @ts-check
 
-import { test } from "node:test";
 import * as assert from "node:assert";
+import { test } from "node:test";
 
 import { Codeowners } from "../dist/codeowners.js";
 
