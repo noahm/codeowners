@@ -34,12 +34,12 @@
     "true-case-path": "^2.0.0"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "^0.16.0",
-    "@biomejs/biome": "^1.9.0",
+    "@arethetypeswrong/cli": "^0.18.0",
+    "@biomejs/biome": "^2.2.0",
     "@types/node": "^20.0.0",
     "bun-types": "latest",
     "tsup": "^8.0.0",
-    "typescript": "^5.2.0"
+    "typescript": "^5.9.0"
   },
   "engines": {
     "node": ">=16.10.0"
