@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     name: All status checks
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: oven-sh/setup-bun@v2
 
       - name: Install Dependencies
@@ -33,7 +33,7 @@ jobs:
       matrix:
         node: [20, 22, 24]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: oven-sh/setup-bun@v2
       - name: Install Dependencies
         run: bun install
