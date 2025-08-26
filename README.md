@@ -12,7 +12,7 @@ This metadata can be made even easier to access with [a companion VS Code extens
 ## Library usage
 
 ```js
-const Codeowners = require('@nmann/codeowners');
+import Codeowners from '@nmann/codeowners';
 
 // defaults to process.cwd(), but can pass a different directory path to constructor
 const owners = new Codeowners();
