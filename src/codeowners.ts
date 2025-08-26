@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { findUpSync } from "find-up";
 import ignore from "ignore";
-import * as tcp from "true-case-path";
+import tcp from "true-case-path";
 
 import { ContactInfo } from "./contact-info";
 import { isDirectorySync } from "./utils";
