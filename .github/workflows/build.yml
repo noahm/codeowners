@@ -39,7 +39,7 @@ jobs:
         run: bun install
       - name: Build (tsup)
         run: bun run build
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
       - name: Node.js sanity test
