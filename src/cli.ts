@@ -6,7 +6,6 @@ import { walkStream } from "@nodelib/fs.walk";
 import { program } from "commander";
 import { findUpSync } from "find-up";
 import ignore from "ignore";
-
 import { Codeowners } from "./codeowners";
 import { intersection, padEnd } from "./utils";
 
@@ -144,6 +143,22 @@ program
     // print owners
     for (const currOwner of verifiedOwners) {
       console.log(`${checkPath}    ${currOwner}`);
+    }
+  });
+
+program
+  .command("orphans")
+  .description("list CODEOWNER entries which do not have any matches")
+  .option(
+    "-c, --codeowners-filename <codeowners_filename>",
+    "specify CODEOWNERS filename",
+    "CODEOWNERS",
+  )
+  .action((options) => {
+    const codeowners = new Codeowners(rootPath, options.codeownersFilename);
+    const orphans = codeowners.getOrphanedPaths();
+    for (const path of orphans) {
+      console.log(path);
     }
   });
 

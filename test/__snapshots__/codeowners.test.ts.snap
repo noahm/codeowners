@@ -1,4 +1,4 @@
-// Bun Snapshot v1, https://goo.gl/fbAQLP
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
 
 exports[`metadata parses metadata 1`] = `
 [
@@ -11,6 +11,11 @@ exports[`metadata parses metadata 1`] = `
     "ice-cream-flavor": "chocolate",
     "owner": "@amoose136",
     "timezone": "EST",
+  },
+  {
+    "ice-cream-flavor": "vanilla",
+    "owner": "@jdunck",
+    "timezone": "PST",
   },
 ]
 `;

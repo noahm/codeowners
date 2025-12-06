@@ -1,9 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
 import { findUpSync } from "find-up";
+import { globIterateSync } from "glob";
 import ignore from "ignore";
 import tcp from "true-case-path";
-
 import { ContactInfo } from "./contact-info";
 import { isDirectorySync } from "./utils";
 
@@ -130,6 +130,26 @@ export class Codeowners {
       return this.pathsByOwner[owner].slice();
     }
     return [];
+  }
+
+  getOrphanedPaths(): string[] {
+    const entrySatisfaction: [OwnerEntry, boolean][] = this.ownerEntries.map((entry) => {
+      const full = path.join(this.codeownersDirectory, entry.path);
+      try {
+        const iterator = globIterateSync(full, {});
+        const result = iterator.next();
+
+        // If done is false, there's at least one match (satisfied)
+        // If done is true, there are no matches (orphaned)
+        const satisfied = !result.done;
+        iterator.return?.();
+        return [entry, satisfied];
+      } catch {
+        return [entry, false];
+      }
+    });
+
+    return entrySatisfaction.filter(([_, satisfied]) => !satisfied).map(([entry]) => entry.path);
   }
 }
 

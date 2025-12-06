@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Feat: `codeowners orphans` lists any entries which have no matching directories
+
 ## v2.1.1
 
 - Fix: build with `esModuleInterop` to better support `true-case-path` imports in more scenarios
