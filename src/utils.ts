@@ -19,7 +19,9 @@ export function times<T>(count: number, cb: (n: number) => T, indexAt = 0): Arra
 
 export function padEnd(input: string, length: number): string {
   const strLength = length ? input.length : 0;
-  return length && strLength < length ? input + times(length - strLength, () => " ") : input || "";
+  return length && strLength < length
+    ? input + times(length - strLength, () => " ").join("")
+    : input || "";
 }
 
 export function intersection<T>(a: Array<T>, b: Array<T>): Array<T> {
