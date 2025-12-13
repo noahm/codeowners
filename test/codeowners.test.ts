@@ -16,6 +16,10 @@ describe("codeowners", () => {
     const owner = repos.getOwner(import.meta.path);
     expect(owner).toEqual(["@noahm"]);
   });
+
+  it("returns any listed paths which do not exist", () => {
+    expect(repos.getOrphanedPaths()).toContainAllValues(["non-existent"]);
+  });
 });
 
 describe("metadata", () => {
