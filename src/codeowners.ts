@@ -5,7 +5,7 @@ import { globIterateSync } from "glob";
 import ignore from "ignore";
 import tcp from "true-case-path";
 import { ContactInfo } from "./contact-info";
-import { isDirectorySync } from "./utils";
+import { convertPatternToGlob, isDirectorySync } from "./utils";
 
 function ownerMatcher(pathString: string) {
   const matcher = ignore().add(pathString);
@@ -132,12 +132,12 @@ export class Codeowners {
     return [];
   }
 
-  getOrphanedPaths(): string[] {
-    const entrySatisfaction: [OwnerEntry, boolean][] = this.ownerEntries.map((entry) => {
-      const full = path.join(this.codeownersDirectory, entry.path);
+  getOrphanedEntries(): OwnerEntry[] {
+    return this.ownerEntries.flatMap((entry) => {
       try {
-        const iterator = globIterateSync(full, {
+        const iterator = globIterateSync(convertPatternToGlob(entry.path), {
           nodir: true,
+          cwd: this.codeownersDirectory,
         });
         const result = iterator.next();
 
@@ -145,13 +145,15 @@ export class Codeowners {
         // If done is true, there are no matches (orphaned)
         const satisfied = !result.done;
         iterator.return?.();
-        return [entry, satisfied];
-      } catch {
-        return [entry, false];
+        if (!satisfied) {
+          return entry;
+        }
+        return [];
+      } catch (e) {
+        console.error(e);
+        return entry;
       }
     });
-
-    return entrySatisfaction.filter(([_, satisfied]) => !satisfied).map(([entry]) => entry.path);
   }
 }
 

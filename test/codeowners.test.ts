@@ -18,7 +18,7 @@ describe("codeowners", () => {
   });
 
   it("returns any listed paths which do not exist", () => {
-    expect(repos.getOrphanedPaths()).toContainAllValues(["non-existent"]);
+    expect(repos.getOrphanedEntries().map((e) => e.path)).toContainAllValues(["non-existent"]);
   });
 });
 

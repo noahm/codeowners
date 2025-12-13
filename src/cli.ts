@@ -144,7 +144,7 @@ program
 
 program
   .command("orphans")
-  .description("list CODEOWNER entries which do not have any matches")
+  .description("list CODEOWNERS entries which do not have any matching files")
   .option(
     "-c, --codeowners-filename <codeowners_filename>",
     "specify CODEOWNERS filename",
@@ -152,9 +152,9 @@ program
   )
   .action((options) => {
     const codeowners = new Codeowners(rootPath, options.codeownersFilename);
-    const orphans = codeowners.getOrphanedPaths();
+    const orphans = codeowners.getOrphanedEntries();
     for (const path of orphans) {
-      console.log(path);
+      console.log(path.path, path.usernames);
     }
   });
 

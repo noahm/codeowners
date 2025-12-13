@@ -34,3 +34,25 @@ export function intersection<T>(a: Array<T>, b: Array<T>): Array<T> {
   }
   return ret;
 }
+
+/**
+ * convert from gitignore format (https://git-scm.com/docs/gitignore#_pattern_format)
+ * to glob format describing the CODEOWNERS behavior (https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#example-of-a-codeowners-file)
+ *
+ * @param filePattern a pattern expressed on a line of a CODEOWNERS file
+ * @returns a glob expression that will match the intended files when eval'd in the codeowners root directory
+ */
+export function convertPatternToGlob(filePattern: string) {
+  let glob = filePattern;
+  // first handle the beginning
+  if (glob.startsWith("/")) {
+    glob = `.${glob}`;
+  } else {
+    glob = `**/${glob}`;
+  }
+  // then handle the ending
+  if (glob.endsWith("/")) {
+    glob += "**/*";
+  }
+  return glob;
+}

@@ -3,7 +3,7 @@
 ## v3.0.0
 
 - **Breaking:** supported Node version is now `>=20.8.0`
-- Feat: `codeowners orphans` (CLI) or `.getOrphanedPaths()` (API) lists any entries which do not match any files
+- Feat: `codeowners orphans` (CLI) or `.getOrphanedEntries()` (API) lists any entries which do not match any files
 
 ## v2.1.1
 
