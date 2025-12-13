@@ -1,7 +1,7 @@
 {
   "name": "@nmann/codeowners",
   "version": "3.0.0",
-  "description": "A tool for working with CODEOWNERS files",
+  "description": "A package and CLI for getting more out of CODEOWNERS files",
   "type": "module",
   "main": "./dist/codeowners.js",
   "types": "./dist/codeowners.d.ts",
@@ -19,7 +19,8 @@
   "keywords": [
     "codeowners",
     "github",
-    "gitlab"
+    "gitlab",
+    "bitbucket"
   ],
   "contributors": [
     "Beau Gunderson <beau@beaugunderson.com> (https://beaugunderson.com/)",
