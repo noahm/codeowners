@@ -1,8 +1,9 @@
 # Changelog
 
-## Unreleased
+## v3.0.0
 
-- Feat: `codeowners orphans` lists any entries which have no matching directories
+- **Breaking:** supported Node version is now `>=20.8.0`
+- Feat: `codeowners orphans` (CLI) or `.getOrphanedPaths()` (API) lists any entries which do not match any files
 
 ## v2.1.1
 
