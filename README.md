@@ -92,3 +92,14 @@ Verify users/teams own a specific path
 ```sh
 $ codeowners verify src/ @foob_ar @contoso/engineers
 ```
+
+# Developing
+
+This project uses [Bun](https://bun.sh/) to install dependencies and run tests, and it is my personal recommendation that you use [mise](https://mise.jdx.dev/) to manage the installation. Simply type `bun install` within this project to install the expected version of bun.
+
+- `bun install` to install dependencies
+- `bun test` to run unit tests
+- `bun run lint` to run all linters (Biome)
+- `bun run format` to apply formatting (Biome)
+- `bun run typecheck` runs `tsc`
+- `bun run attw` runs "Are the types wrong" (sanity checks on type resolution issues)
