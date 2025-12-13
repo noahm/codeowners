@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { findUpSync } from "find-up";
+import { globIterateSync } from "glob";
 import ignore from "ignore";
-import { PathScurry, type WalkOptions } from "path-scurry";
 import tcp from "true-case-path";
 import { ContactInfo } from "./contact-info";
 import { isDirectorySync } from "./utils";
@@ -133,16 +133,12 @@ export class Codeowners {
   }
 
   getOrphanedPaths(): string[] {
-    const ps = new PathScurry(this.codeownersDirectory);
     const entrySatisfaction: [OwnerEntry, boolean][] = this.ownerEntries.map((entry) => {
+      const full = path.join(this.codeownersDirectory, entry.path);
       try {
-        const opts: WalkOptions = {
-          filter(entry) {
-            return entry.isType("File");
-          },
-        };
-        const iterator =
-          entry.path === "*" ? ps.iterateSync(opts) : ps.iterateSync(entry.path, opts);
+        const iterator = globIterateSync(full, {
+          nodir: true,
+        });
         const result = iterator.next();
 
         // If done is false, there's at least one match (satisfied)
