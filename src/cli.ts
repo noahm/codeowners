@@ -2,9 +2,9 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import { globStreamSync } from "glob";
 import { program } from "commander";
 import { findUpSync } from "find-up";
+import { globStreamSync } from "glob";
 import ignore from "ignore";
 import { Codeowners } from "./codeowners";
 import { intersection, padEnd } from "./utils";
@@ -58,19 +58,17 @@ program
 
     const padding = Number.parseInt(options.width, 10);
 
-    const stream = globStreamSync(path.join(rootPath, '**/*'), {
+    const stream = globStreamSync(path.join(rootPath, "**/*"), {
       nodir: true,
       ignore: {
         childrenIgnored(p) {
-          return p.isNamed('node_modules');
+          return p.isNamed("node_modules");
         },
       },
     });
 
     stream.on("data", (file) => {
-      let relative = path
-        .relative(codeowners.codeownersDirectory, file)
-        .replace(/(\r)/g, "\\r");
+      let relative = path.relative(codeowners.codeownersDirectory, file).replace(/(\r)/g, "\\r");
       if (gitignoreMatcher.ignores(relative)) {
         return;
       }
