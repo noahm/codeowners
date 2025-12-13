@@ -136,7 +136,9 @@ export class Codeowners {
     const entrySatisfaction: [OwnerEntry, boolean][] = this.ownerEntries.map((entry) => {
       const full = path.join(this.codeownersDirectory, entry.path);
       try {
-        const iterator = globIterateSync(full, {});
+        const iterator = globIterateSync(full, {
+          nodir: true,
+        });
         const result = iterator.next();
 
         // If done is false, there's at least one match (satisfied)

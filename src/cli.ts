@@ -2,7 +2,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import { walkStream } from "@nodelib/fs.walk";
+import { globStreamSync } from "glob";
 import { program } from "commander";
 import { findUpSync } from "find-up";
 import ignore from "ignore";
@@ -58,20 +58,18 @@ program
 
     const padding = Number.parseInt(options.width, 10);
 
-    const stream = walkStream(rootPath, {
-      deepFilter: (entry) => {
-        const split = entry.path.split(path.sep);
-        return (
-          !split.includes("node_modules") && !split.includes(".git") && !split.includes(".cache")
-        );
+    const stream = globStreamSync(path.join(rootPath, '**/*'), {
+      nodir: true,
+      ignore: {
+        childrenIgnored(p) {
+          return p.isNamed('node_modules');
+        },
       },
-      errorFilter: (error) =>
-        error.code === "ENOENT" || error.code === "EACCES" || error.code === "EPERM",
     });
 
     stream.on("data", (file) => {
       let relative = path
-        .relative(codeowners.codeownersDirectory, file.path)
+        .relative(codeowners.codeownersDirectory, file)
         .replace(/(\r)/g, "\\r");
       if (gitignoreMatcher.ignores(relative)) {
         return;
