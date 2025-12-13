@@ -2,12 +2,14 @@
 
 [![npm](https://img.shields.io/npm/v/@nmann/codeowners)](https://www.npmjs.com/package/@nmann/codeowners)
 
-A library and CLI for interacting with GitHub's
+A package and CLI for getting more out of 
 [CODEOWNERS](https://help.github.com/articles/about-codeowners/) files.
 
-It extends GitHubs's file format to to use the CODEOWNERS file as a source of truth for metadata about teams. This is useful for quick reference to things like preferred contact channels, JIRA project names, etc.
+In addition to typical usage, this also allows a CODEOWNERS file to serve as a source of truth for [metadata about teams and individuals](#team-metadata). This is useful for quick reference to things like preferred contact channels, JIRA project names, etc.
 
-This metadata can be made even easier to access with [a companion VS Code extension](https://marketplace.visualstudio.com/items?itemName=noahm.codeowners-extended).
+This metadata is even more convenient to use via [the companion VS Code extension](https://marketplace.visualstudio.com/items?itemName=noahm.codeowners-extended).
+
+CODEOWNERS files will be auto-detected in all standard locations including `.github`, `.gitlab`, and `.bitbucket` directories.
 
 ## Library usage
 
@@ -15,13 +17,13 @@ This metadata can be made even easier to access with [a companion VS Code extens
 import Codeowners from '@nmann/codeowners';
 
 // defaults to process.cwd(), but can pass a different directory path to constructor
-const owners = new Codeowners();
-owners.getOwner('path/to/file.js'); // returns array of one or more owners, e.g. ['@noahm']
+const owners = new Codeowners(optionalRootDir);
+owners.getOwner('path/to/file.js'); // returns array of owners, e.g. ['@noahm']
 ```
 
 ### Team metadata
 
-This library will attempt to parse out contact info for teams if listed in a simple space-separated-values format. Only lines beginning with a double-pound "##" will be parsed.
+This library will attempt to parse out contact info for teams if listed in a simple format of space-separated values. Only lines beginning with a double-pound "##" will be parsed.
 
 The first line is a space-separated list of column names, and the following lines provide values for those columns, one line per team.
 
