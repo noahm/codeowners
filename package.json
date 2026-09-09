@@ -29,7 +29,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "commander": "^14.0.0",
+    "commander": "^15.0.0",
     "find-up": "^8.0.0",
     "glob": "^13.0.0",
     "ignore": "^7.0.0",
